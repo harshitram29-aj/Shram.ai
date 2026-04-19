@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Shram is different — and why everything else failed you</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0a0a0a;--ink2:#1a1a1a;--ink3:#525252;--ink4:#a3a3a3;
+  --bg:#fafaf9;--card:#fff;--border:#e5e5e5;
+  --sh:#1c1917;--sh-accent:#f97316;--sh-light:#fff7ed;--sh-mid:#fed7aa;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.65;overflow-x:hidden}
+
+/* NAV */
+nav{padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:var(--card);position:sticky;top:0;z-index:50}
+.nav-logo{display:flex;align-items:center;gap:8px}
+.nav-logo img{width:26px;height:26px;border-radius:6px}
+.nav-logo-text{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:var(--ink)}
+.nav-tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink4);letter-spacing:.06em}
+.nav-cta{background:var(--sh);color:#fff;padding:7px 16px;border-radius:7px;font-size:13px;font-weight:500;text-decoration:none;transition:opacity .15s}
+.nav-cta:hover{opacity:.85}
+
+/* HERO */
+.hero{max-width:720px;margin:0 auto;padding:5rem 2rem 3rem;text-align:center}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sh-accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-family:'Instrument Serif',serif;font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin-bottom:1.25rem}
+h1 em{font-style:italic;color:var(--sh-accent)}
+.hero-sub{font-size:1.05rem;color:var(--ink3);max-width:520px;margin:0 auto 2.5rem;line-height:1.7}
+.hero-cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--sh);color:#fff;padding:11px 24px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;border:none;cursor:pointer;transition:opacity .15s}
+.btn-primary:hover{opacity:.85}
+.btn-ghost{background:transparent;color:var(--ink2);padding:11px 24px;border-radius:8px;font-size:14px;font-weight:500;border:1px solid var(--border);cursor:pointer}
+
+/* PAIN SECTION */
+.pain{background:var(--sh);padding:3.5rem 2rem;text-align:center}
+.pain-inner{max-width:680px;margin:0 auto}
+.pain h2{font-family:'Instrument Serif',serif;font-size:clamp(1.6rem,3.5vw,2.4rem);color:#fff;line-height:1.2;margin-bottom:.75rem}
+.pain-sub{font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto}
+.scenario-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;text-align:left}
+.scenario{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem 1.1rem}
+.sc-icon{font-size:20px;margin-bottom:.5rem}
+.sc-text{font-size:13px;color:rgba(255,255,255,.7);line-height:1.55}
+.sc-text strong{color:#fff;display:block;margin-bottom:.2rem;font-size:13px}
+
+/* HOW IT WORKS */
+.how{max-width:720px;margin:0 auto;padding:3.5rem 2rem}
+.sec-tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+h2{font-family:'Instrument Serif',serif;font-size:clamp(1.5rem,3vw,2.2rem);line-height:1.2;letter-spacing:-.02em;color:var(--ink);margin-bottom:.5rem}
+.section-lead{font-size:.95rem;color:var(--ink3);line-height:1.65;max-width:540px;margin-bottom:2rem}
+.steps{display:flex;flex-direction:column;gap:1px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.step{display:flex;gap:1.25rem;padding:1.25rem 1.5rem;background:var(--card);border-bottom:1px solid var(--border);align-items:flex-start;transition:background .15s}
+.step:last-child{border-bottom:none}
+.step:hover{background:#fafaf9}
+.step-num{width:28px;height:28px;border-radius:50%;background:var(--sh-light);border:1px solid var(--sh-mid);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--sh-accent);flex-shrink:0;margin-top:2px}
+.step-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:.3rem}
+.step-body{font-size:13px;color:var(--ink3);line-height:1.55}
+.step-tag{display:inline-block;font-size:10px;font-weight:500;font-family:'JetBrains Mono',monospace;padding:2px 8px;border-radius:20px;background:var(--sh-light);color:var(--sh-accent);margin-top:.4rem;border:1px solid var(--sh-mid)}
+
+/* VS GRID */
+.vs-section{background:var(--bg);padding:3.5rem 2rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.vs-inner{max-width:800px;margin:0 auto}
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem}
+.vs-card{border-radius:12px;padding:1.25rem;border:1px solid var(--border)}
+.vs-card.old{background:#fafaf9}
+.vs-card.new{background:var(--sh-light);border-color:var(--sh-mid)}
+.vs-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:20px;display:inline-block;margin-bottom:.75rem}
+.vs-label.old{background:#f5f5f4;color:var(--ink4)}
+.vs-label.new{background:var(--sh-accent);color:#fff}
+.vs-title{font-size:14px;font-weight:600;margin-bottom:.5rem;color:var(--ink)}
+.vs-list{font-size:13px;color:var(--ink3);line-height:1.8;list-style:none}
+.vs-list.old li::before{content:'✗  ';color:#d4a;opacity:.5}
+.vs-list.new li::before{content:'✓  ';color:var(--sh-accent)}
+
+/* FOR WHO */
+.for-who{max-width:720px;margin:0 auto;padding:3.5rem 2rem}
+.persona-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1.5rem}
+.persona{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.1rem;transition:border-color .2s}
+.persona:hover{border-color:var(--sh-mid)}
+.persona-icon{font-size:1.5rem;margin-bottom:.5rem}
+.persona-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:.3rem}
+.persona-body{font-size:12px;color:var(--ink3);line-height:1.55}
+
+/* QUOTE */
+.quote-section{background:var(--sh);padding:3rem 2rem;text-align:center}
+.quote-inner{max-width:600px;margin:0 auto}
+.quote-text{font-family:'Instrument Serif',serif;font-size:1.4rem;font-style:italic;color:#fff;line-height:1.5;margin-bottom:1rem}
+.quote-attr{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.06em}
+
+/* BUILDER NOTE */
+.builder{max-width:720px;margin:2.5rem auto;padding:1.5rem 2rem}
+.builder-card{background:var(--sh-light);border:1px solid var(--sh-mid);border-radius:12px;padding:1.25rem 1.5rem;display:flex;gap:1.25rem;align-items:flex-start;flex-wrap:wrap}
+.builder-text h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:.3rem}
+.builder-text p{font-size:13px;color:var(--ink3);line-height:1.6;max-width:460px}
+.builder-contact{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink3);line-height:1.9;flex-shrink:0}
+
+footer{border-top:1px solid var(--border);padding:1rem 2rem;text-align:center}
+footer p{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink4)}
+
+@media(max-width:600px){
+  .vs-grid{grid-template-columns:1fr}
+  .hero,.how,.for-who{padding-left:1.25rem;padding-right:1.25rem}
+  nav{padding:.75rem 1.25rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="26" height="26" rx="6" fill="#1c1917"/>
+      <circle cx="9" cy="9" r="3.5" fill="#f97316"/>
+      <circle cx="17" cy="17" r="3.5" fill="#f97316" opacity=".6"/>
+      <circle cx="17" cy="9" r="2" fill="#f97316" opacity=".35"/>
+      <circle cx="9" cy="17" r="2" fill="#f97316" opacity=".35"/>
+    </svg>
+    <span class="nav-logo-text">Shram</span>
+  </div>
+  <span class="nav-tag">Built by Harshit · Proof of work</span>
+  <a href="https://www.shram.ai" class="nav-cta" target="_blank">Request access →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">The follow-up problem, solved</div>
+  <h1>You don't forget people.<br>You forget to <em>reply</em> to them.</h1>
+  <p class="hero-sub">Every day, conversations pile up across Gmail, WhatsApp, and meetings. Each one carries an unspoken promise. Most of them quietly die — not because you stopped caring, but because nobody caught the drop.</p>
+  <div class="hero-cta-row">
+    <a href="https://www.shram.ai" class="btn-primary" target="_blank">Request early access</a>
+  </div>
+</div>
+
+<!-- PAIN -->
+<div class="pain">
+  <div class="pain-inner">
+    <h2>These aren't edge cases.<br>This is every week.</h2>
+    <p class="pain-sub">The cost isn't one missed message. It's the slow erosion of every relationship that runs on momentum.</p>
+    <div class="scenario-grid">
+      <div class="scenario">
+        <div class="sc-icon">📞</div>
+        <div class="sc-text"><strong>The call that went nowhere</strong>Great conversation. You said you'd send the proposal. Three days passed. They moved on.</div>
+      </div>
+      <div class="scenario">
+        <div class="sc-icon">📬</div>
+        <div class="sc-text"><strong>The email that needed a nudge</strong>They said "let me check with the team." You never followed up. The deal quietly died.</div>
+      </div>
+      <div class="scenario">
+        <div class="sc-icon">💬</div>
+        <div class="sc-text"><strong>The WhatsApp that got buried</strong>Someone asked a question. You saw it. You forgot. Two weeks later they went elsewhere.</div>
+      </div>
+      <div class="scenario">
+        <div class="sc-icon">📅</div>
+        <div class="sc-text"><strong>The meeting with no next step</strong>You discussed everything. Nobody sent a recap or scheduled the follow-up. It faded.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how">
+  <div class="sec-tag">How Shram works</div>
+  <h2>Finds it. Drafts it. Does it.</h2>
+  <p class="section-lead">No setup. No integrations. No new inbox to check. Shram runs in the background across the tools you already use.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Finds what you missed</div>
+        <div class="step-body">Shram watches your Gmail, Google Calendar, and WhatsApp — the places where follow-ups actually live. It spots when a conversation needs a response, a check-in, or a next meeting, before the window closes.</div>
+        <span class="step-tag">Passive · No setup needed</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Drafts with full context</div>
+        <div class="step-body">Using an on-device memory layer that retains your conversation history, Shram drafts a reply that sounds like you — referencing what was actually discussed, not a generic template. If you promised a revised proposal two months ago, Shram remembers.</div>
+        <span class="step-tag">Context-aware · On-device memory</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Executes in one click</div>
+        <div class="step-body">The follow-up appears as a task. You review it, hit execute, and Shram's desktop agent sends it — across whatever app the conversation was in. You stay in control. Shram does the work.</div>
+        <span class="step-tag">One-click execution · Desktop agent</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VS SECTION -->
+<div class="vs-section">
+  <div class="vs-inner">
+    <div class="sec-tag">Why not the others</div>
+    <h2>You've tried reminders.<br>They didn't work either.</h2>
+    <p class="section-lead" style="margin-bottom:0">Todo apps tell you what to do. CRMs need hours of maintenance. AI assistants wait to be asked. Shram watches, thinks, and acts — without you having to remember to use it.</p>
+    <div class="vs-grid">
+      <div class="vs-card old">
+        <span class="vs-label old">Everything else</span>
+        <div class="vs-title">Requires you to remember</div>
+        <ul class="vs-list old">
+          <li>You have to create the reminder</li>
+          <li>You have to log the conversation</li>
+          <li>You have to write the follow-up</li>
+          <li>You have to remember to check it</li>
+          <li>Generic templates, no real context</li>
+          <li>Still you doing all the thinking</li>
+        </ul>
+      </div>
+      <div class="vs-card new">
+        <span class="vs-label new">Shram</span>
+        <div class="vs-title">Does the remembering for you</div>
+        <ul class="vs-list new">
+          <li>Spots the follow-up automatically</li>
+          <li>Reads context across all your apps</li>
+          <li>Drafts based on actual conversation</li>
+          <li>Surfaces it before you miss the window</li>
+          <li>Executes with one click</li>
+          <li>Learns from you over time</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOR WHO -->
+<div class="for-who">
+  <div class="sec-tag">Who it's for</div>
+  <h2>If your work runs on<br>relationships that need to move.</h2>
+  <p class="section-lead">Shram is for people who care deeply about the people they work with — and keep dropping the ball anyway because there's too much to track.</p>
+
+  <div class="persona-grid">
+    <div class="persona">
+      <div class="persona-icon">🤝</div>
+      <div class="persona-title">Founders & BD leads</div>
+      <div class="persona-body">Every investor, partner, and prospect conversation has a next step. Shram makes sure none of them disappear into the noise.</div>
+    </div>
+    <div class="persona">
+      <div class="persona-icon">💼</div>
+      <div class="persona-title">Account managers</div>
+      <div class="persona-body">Clients expect you to remember everything. With Shram, you actually do — because it remembers on your behalf.</div>
+    </div>
+    <div class="persona">
+      <div class="persona-icon">🎯</div>
+      <div class="persona-title">Sales professionals</div>
+      <div class="persona-body">The follow-up is where deals are won or lost. Shram makes sure you're always the one who followed up, not the one who forgot to.</div>
+    </div>
+    <div class="persona">
+      <div class="persona-icon">⚡</div>
+      <div class="persona-title">High-agency operators</div>
+      <div class="persona-body">You move fast. That means things fall through. Shram runs in the background so your speed doesn't cost you relationships.</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <div class="quote-inner">
+    <div class="quote-text">"Most tools built by engineers don't speak to non-engineers. They're efficient, but not always intuitive. Logical, but not always human."</div>
+    <div class="quote-attr">JAY GADEKAR · CO-FOUNDER, SHRAM</div>
+  </div>
+</div>
+
+<!-- BUILDER NOTE -->
+<div class="builder">
+  <div class="builder-card">
+    <div class="builder-text">
+      <h4>This page wasn't commissioned. It was built as proof of work.</h4>
+      <p>I'm applying to work with Jay and Ojasvika at Shram. I built this because the product deserves a sharper way to explain what it does and who it's for — before someone gives up and goes back to their todo app. That's the kind of work I want to do.</p>
+    </div>
+    <div class="builder-contact">
+      Harshit Ram Yandapalli<br>
+      harshitram29@gmail.com<br>
+      +91 9676747774
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Shram · shram.ai · Finds your follow-ups and does them for you · Page built by Harshit Ram Yandapalli as unsolicited proof of work</p>
+</footer>
+
+</body>
+</html>
